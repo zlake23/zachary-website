@@ -1,5 +1,34 @@
 print('Building Site...')
 
+pages = [
+    {
+        "filename": "content/index.html",
+        "output": "docs/index.html",
+        "title": "Home Page",
+    }
+
+    {
+        "filename": "content/blog.html",
+        "output": "docs/blog.html",
+        "title": "My Blog",
+    }
+
+    {
+        "filename": "content/projects.html",
+        "output": "docs/projects.html",
+        "title": "My Projects",
+    }
+
+    {
+        "filename": "content/contact.html",
+        "output": "docs/contact.html",
+        "title": "Contact Page",
+    }
+]
+
+
+def main():
+
 # Read template files
 top_html = open('./templates/top.html').read()
 bottom_html = open('./templates/bottom.html').read()
@@ -25,3 +54,5 @@ open('./docs/projects.html', 'w+').write(projects_html)
 content = open('./content/middle-contact.html').read()
 contact_html = top_html + content + bottom_html
 open('./docs/contact.html', 'w+').write(contact_html)
+
+main()
