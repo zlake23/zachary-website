@@ -23,14 +23,13 @@ pages = [
 ]
 
 def main():
-    # Read in template files
-    top = open('./templates/top.html').read()
-    bottom = open('./templates/bottom.html').read()
+    # Read in base template file
+    template = open('./templates/base.html').read()
 
     # Loop through each dictionary in page list to compile html pages
     for page in pages:
         content = open(page['filename']).read()
-        doc = top + content + bottom
+        doc = template.replace("{{content}}", content)
         open(page['output'], 'w+').write(doc)
 
 main()
