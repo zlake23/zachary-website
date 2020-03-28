@@ -22,14 +22,28 @@ pages = [
     },
 ]
 
-def main():
-    # Read in base template file
+def apply_template(content):
     template = open('./templates/base.html').read()
+    template.replace("{{content}}", content)
+    return template
 
-    # Loop through each dictionary in page list to compile html pages
+def main(doc):
     for page in pages:
         content = open(page['filename']).read()
-        doc = template.replace("{{content}}", content)
-        open(page['output'], 'w+').write(doc)
+        doc = apply_template(content)
+    return doc
 
-main()
+def build():
+    for page in pages:
+        open(page['output'], 'w+').write(main(doc))
+# def main():
+#     # Read in base template file
+#     template = open('./templates/base.html').read()
+
+#     # Loop through each dictionary in page list to compile html pages
+#     for page in pages:
+#         content = open(page['filename']).read()
+#         doc = template.replace("{{content}}", content)
+#         open(page['output'], 'w+').write(doc)
+
+# main()
