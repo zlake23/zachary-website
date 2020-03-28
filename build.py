@@ -22,20 +22,33 @@ pages = [
     },
 ]
 
+# apply_template function will read in base template and
+# replace content string with code from each html page
 def apply_template(content):
     template = open('./templates/base.html').read()
-    template.replace("{{content}}", content)
+    template = template.replace("{{content}}", content)
     return template
 
-def main(doc):
-    for page in pages:
-        content = open(page['filename']).read()
-        doc = apply_template(content)
-    return doc
 
-def build():
+# def build(doc):
+#     finished_doc = open(page['output'], 'w+').write(doc)
+#     return finished_doc
+
+
+# main function will run other functions for building template,
+# reading files and writing to docs directory
+def main():
     for page in pages:
-        open(page['output'], 'w+').write(main(doc))
+        print('Reading files')
+        content = open(page['filename']).read()
+        print('Compiling templates')
+        doc = apply_template(content) 
+        print(doc)
+        # build(doc)
+
+main()
+
+
 # def main():
 #     # Read in base template file
 #     template = open('./templates/base.html').read()
