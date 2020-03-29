@@ -1,6 +1,18 @@
 print('Building Site...')
 pages = [
     {
+        "filename": "content/index.html",
+        "output": "docs/index.html",
+        "title": "Zachary Lake",
+    },
+   
+    {
+        "filename": "content/blog.html",
+        "output": "docs/blog.html",
+        "title": "My Blog",
+    },
+
+    {
         "filename": "content/projects.html",
         "output": "docs/projects.html",
         "title": "My Projects",
@@ -10,23 +22,14 @@ pages = [
         "output": "docs/contact.html",
         "title": "Contact Page",
     },
-    {
-        "filename": "content/index.html",
-        "output": "docs/index.html",
-        "title": "Home Page",
-    },
-    {
-        "filename": "content/blog.html",
-        "output": "docs/blog.html",
-        "title": "My Blog",
-    },
 ]
 
 # apply_template function will read in base template and
 # replace content string with code from each html page
-def apply_template(content):
+def apply_template(content, title):
     template = open('./templates/base.html').read()
     template = template.replace("{{content}}", content)
+    template = template.replace("{{title}}", title)
     return template
 
 # build function will write the completed webpage 
@@ -40,13 +43,11 @@ def build(doc, page):
 def main():
     for page in pages:
         content = open(page['filename']).read()
-        print('Reading', page['filename'])
+        title = page['title']
+        print('Reading:', page['filename'])
         
-        doc = apply_template(content) 
-        print('Compiling template')
-        
-        #use build function to replace line 49
-        # open(page['output'], 'w+').write(doc) 
+        doc = apply_template(content, title) 
+        print('Compiling template:', page['output'])
 
         finished_webpage = build(doc, page)
     print('Webpage built')
